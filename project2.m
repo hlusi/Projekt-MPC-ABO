@@ -3,11 +3,11 @@ function [C1,C2] = project2(path)
 %im = im2double(imread('data_new/11.png'));%
 im = im2double(imread(path));
 
-im = histeq(im); %ekvalizace histogramu- pomaha jen nekdy
-
+% Image segmentation
+seg_im = segmentation(im);
 
 %detekce hran
-im_edge = edge(im,'canny'); % hranova detekce
+im_edge = edge(seg_im,'canny'); % hranova detekce
 
 %houghova transformace
 rs = 5:35; % rozsah polomeru
@@ -55,8 +55,17 @@ for i = 1:size(hs,1)
     end
 end
 
-%figure
-%imshow(im)
-%hold on
-%plot(C2,C1,'r*')
+% figure
+% subplot 131
+% imshow(im)
+% hold on
+% plot(C2,C1,'r*')
+% subplot 132
+% imshow(seg_im,[])
+% hold on
+% plot(C2,C1,'r*')
+% subplot 133
+% imshow(im_edge)
+% hold on
+% plot(C2,C1,'r*')
 end
